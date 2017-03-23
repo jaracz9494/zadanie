@@ -5,6 +5,7 @@
  */
 package service;
 
+import DATA_connect.Laczenie_z_baza;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -42,8 +43,11 @@ public class Logowanie {
     }
     
     public String sprawdz() {
-        if (nazwa.equals("admin") && haslo.equals("pass")) {
-            return "views/mainView";
+        Laczenie_z_baza baza = new Laczenie_z_baza();
+        if (baza.sprawdzenieLP(nazwa, haslo)) { 
+            baza.wywolanie_bazy(nazwa);
+            return "views/mainView?faces-redirect=true";
+            
         } else {
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage("test", new FacesMessage("Błąd logowania"));

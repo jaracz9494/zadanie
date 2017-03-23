@@ -23,32 +23,78 @@ public class Laczenie_z_baza {
     
     private java.sql.Connection connection;
     private Statement statement;
-    private String hue="huee";
+    private String adres="../../../Baza/";
+    private static final String Sterownik = "org.apache.derby.jdbc.ClientDriver";
+    private static final String URL = "jdbc:derby://localhost:1527/baza";
+    private static final String BLogin = "user1";
+    private static final String BPass = "zaq1";
+        
+
     
-    public void cos() {
-        System.out.println(hue);
+    public String getAdres() {
+        //String a=adres;
+        //adres="../../../Baza/";
+        System.out.println(adres);                 
+        return adres;
+    }
+
+    public void setAdres(String adres) {
+        this.adres = adres;
     }
     
-    public void wywoalnie_bazy(){
+    public boolean sprawdzenieLP(String login, String haslo) {
         try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-            connection = DriverManager.getConnection("jdbc:derby://localhost:1527/baza", "user1", "zaq1");
+            Class.forName(Sterownik);
+            connection = DriverManager.getConnection(URL, BLogin, BPass);
             statement = connection.createStatement(); 
             
-            ResultSet result=statement.executeQuery("select Nazwisko, ID from studenty");
+            ResultSet result=statement.executeQuery("select LOGIN, PASSWORD from USERS");
+            ResultSetMetaData metadata = result.getMetaData();
+            
+            String l;
+            String p;
+            
+            while(result.next()) {
+                    l=result.getString(1);
+                    p=result.getString(2);
+                    //System.out.print(l+" "+p);
+                    
+                    if (l.equals(login) && p.equals(haslo)) {
+                        connection.close();
+                        return true;
+                    } 
+                                   
+                System.out.println();
+            }
+            
+            connection.close();
+            return false;
+            
+        } catch(Exception ex){
+            System.out.println("blad " + ex.getMessage());
+            return false;
+        }
+    }
+    
+    public void wywolanie_bazy(String nazwa){
+        try {
+            Class.forName(Sterownik);
+            connection = DriverManager.getConnection(URL, BLogin, BPass);
+            statement = connection.createStatement(); 
+            
+            ResultSet result=statement.executeQuery("select NAME from pictures WHERE ID like '" + nazwa +"'");
             ResultSetMetaData metadata = result.getMetaData();
             
             System.out.println(metadata.getColumnCount());
             int ilosckolumn = metadata.getColumnCount();
             
-            while(result.next()) {
-                for (int i=1; i<=ilosckolumn; i++) {
-                    System.out.print(result.getString(i) + " ");                
-                }
-                System.out.println();
+            while(result.next()) {                
+                adres = adres+nazwa+result.getString(1);
+                System.out.println(adres);                 
             }
             
             connection.close();
+            
         } catch(Exception ex){
             System.out.println("blad " + ex.getMessage());
         }
