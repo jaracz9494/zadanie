@@ -44,8 +44,7 @@ public class Logowanie {
     
     public String sprawdz() {
         Laczenie_z_baza baza = new Laczenie_z_baza();
-        if (baza.sprawdzenieLP(nazwa, haslo)) { 
-            baza.wywolanie_bazy(nazwa);
+        if (baza.sprawdzenieLP(nazwa, haslo)) {            
             return "views/mainView?faces-redirect=true";
             
         } else {

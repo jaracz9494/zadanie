@@ -13,9 +13,10 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
         <title>ADMIN</title>
         
         <script type = "text/javascript">
+            
         function pic1()
         {
-            document.getElementById("img").src = "#{laczenie_z_baza.adres}";
+            document.getElementById("img").src = "#{laczenie_z_baza.wywolanie_bazy(logowanie.nazwa)}";
         }
         </script>
         
@@ -27,7 +28,7 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
         <br />
         <br />
         <h:form>
-            <h:commandButton value="Sprawdz baze"></h:commandButton>
+            <h:commandButton value="Wstaw obrazek"></h:commandButton>
         </h:form>
         <br />
         <h:form>

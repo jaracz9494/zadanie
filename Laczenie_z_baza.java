@@ -63,8 +63,7 @@ public class Laczenie_z_baza {
                         connection.close();
                         return true;
                     } 
-                                   
-                System.out.println();
+
             }
             
             connection.close();
@@ -76,8 +75,9 @@ public class Laczenie_z_baza {
         }
     }
     
-    public void wywolanie_bazy(String nazwa){
+    public String wywolanie_bazy(String nazwa){
         try {
+            adres="../../../Baza/";
             Class.forName(Sterownik);
             connection = DriverManager.getConnection(URL, BLogin, BPass);
             statement = connection.createStatement(); 
@@ -94,9 +94,10 @@ public class Laczenie_z_baza {
             }
             
             connection.close();
-            
+            return adres;
         } catch(Exception ex){
             System.out.println("blad " + ex.getMessage());
+            return null;
         }
     }
 }
