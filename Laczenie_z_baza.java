@@ -21,16 +21,17 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class Laczenie_z_baza {
     
-    private java.sql.Connection connection;
-    private Statement statement;
-    private String adres="../../../Baza/";
+    public java.sql.Connection connection;
+    public Statement statement;
+    public ResultSet result;
+    //private String adres="../../../Baza/";
     private static final String Sterownik = "org.apache.derby.jdbc.ClientDriver";
     private static final String URL = "jdbc:derby://localhost:1527/baza";
     private static final String BLogin = "user1";
-    private static final String BPass = "zaq1";
+    private static final String BPass = "zaq1";    
         
 
-    
+    /*
     public String getAdres() {
         //String a=adres;
         //adres="../../../Baza/";
@@ -41,15 +42,25 @@ public class Laczenie_z_baza {
     public void setAdres(String adres) {
         this.adres = adres;
     }
+    */
     
-    public boolean sprawdzenieLP(String login, String haslo) {
+    public void pobieranie_sterownikow() {
         try {
             Class.forName(Sterownik);
             connection = DriverManager.getConnection(URL, BLogin, BPass);
-            statement = connection.createStatement(); 
+            statement = connection.createStatement();
             
-            ResultSet result=statement.executeQuery("select LOGIN, PASSWORD from USERS");
-            ResultSetMetaData metadata = result.getMetaData();
+                    
+        } catch(Exception ex){
+            System.out.println("blad pobierania sterownikow, adresu, loginu lub hasla" + ex.getMessage());
+        }
+    }
+    
+    public boolean sprawdzenieLP(String login, String haslo) {
+        try {
+            pobieranie_sterownikow(); 
+            
+            result=statement.executeQuery("select LOGIN, PASSWORD from USERS");
             
             String l;
             String p;
@@ -75,14 +86,13 @@ public class Laczenie_z_baza {
         }
     }
     
+    /*
     public String wywolanie_bazy(String nazwa){
         try {
             adres="../../../Baza/";
-            Class.forName(Sterownik);
-            connection = DriverManager.getConnection(URL, BLogin, BPass);
-            statement = connection.createStatement(); 
+            pobieranie_sterownikow();
             
-            ResultSet result=statement.executeQuery("select NAME from pictures WHERE ID like '" + nazwa +"'");
+            result=statement.executeQuery("select NAME from pictures WHERE ID like '" + nazwa +"'");
             ResultSetMetaData metadata = result.getMetaData();
             
             System.out.println(metadata.getColumnCount());
@@ -93,6 +103,7 @@ public class Laczenie_z_baza {
                 System.out.println(adres);                 
             }
             
+            
             connection.close();
             return adres;
         } catch(Exception ex){
@@ -100,4 +111,5 @@ public class Laczenie_z_baza {
             return null;
         }
     }
+    */
 }

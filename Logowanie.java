@@ -6,10 +6,13 @@
 package service;
 
 import DATA_connect.Laczenie_z_baza;
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -18,7 +21,7 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @SessionScoped
 //WAZNE! w index.xhtml musisz wpisywac Logowanie z pierwszej litery jako małej! (czyli Logowanie = logowanie)
-public class Logowanie {
+public class Logowanie implements Serializable {
     
     private String nazwa="Stud";
     private String haslo="";
@@ -44,7 +47,9 @@ public class Logowanie {
     
     public String sprawdz() {
         Laczenie_z_baza baza = new Laczenie_z_baza();
-        if (baza.sprawdzenieLP(nazwa, haslo)) {            
+        if (baza.sprawdzenieLP(nazwa, haslo)) { 
+            HttpSession session = SessionUtils.getSession();
+            session.setAttribute("username", nazwa);
             return "views/mainView?faces-redirect=true";
             
         } else {
@@ -53,6 +58,12 @@ public class Logowanie {
             return null;
             //document.getElementById('test').innerHTML = 'blad'
         }
+    }
+    
+    public String logout() {
+	HttpSession session = SessionUtils.getSession();
+	session.invalidate();
+	return "/index?faces-redirect=true";
     }
     
     

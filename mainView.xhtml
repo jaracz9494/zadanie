@@ -10,33 +10,51 @@ xmlns:f="http://java.sun.com/jsf/core"
 xmlns:h="http://java.sun.com/jsf/html"
 xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>ADMIN</title>
+        <title>#{logowanie.nazwa}</title>
         
         <script type = "text/javascript">
             
-        function pic1()
-        {
-            document.getElementById("img").src = "#{laczenie_z_baza.wywolanie_bazy(logowanie.nazwa)}";
-        }
+        
+        
+
         </script>
         
     </h:head>
     <h:body>
+    #{galleryList.clearArrayList()}
+    #{galleryList.wyswietlanie_sciezek(logowanie.nazwa)}
         <h:outputText value="Witaj" style="color: red; size: 25px;" />
         <br />
         <h:outputText value="#{logowanie.nazwa}"></h:outputText>
         <br />
-        <br />
         <h:form>
-            <h:commandButton value="Wstaw obrazek"></h:commandButton>
-        </h:form>
-        <br />
-        <h:form>
+            <h:commandButton action="#{logowanie.logout}" value="Logout"></h:commandButton>
+            <br />
             <h:commandButton value="Powrót na stronę 1" action="/index?faces-redirect=true"></h:commandButton>
         </h:form>
+        <br />
         
-        <img src = "" id = "img" />
-        <input type="button" value="Show Picture1" onclick="pic1()"/>
+        <p3>Wybierz pliki</p3>
+        
+        <h:form enctype="multipart/form-data">
+            <h:inputFile value="#{fileUpload.file1}" /><br />
+            <h:commandButton value="upload" action="#{fileUpload.upload(logowanie.nazwa)}" />
+        </h:form>
+        
+        <br />
+        
+        
+        
+        Przejdz do galerii
+        <h:form>
+            <ui:repeat var="item" value="#{galleryList.arrayList}" >
+                <h:commandButton value="#{item}" action="/vews/gallery?faces-redirect=true" />
+            </ui:repeat>   
+            #{galleryList.clearArrayList()}
+        </h:form>
+        <br />
+    
+        
         <h:graphicImage value="../../../Baza/PL.jpg" />
 
         
