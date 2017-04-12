@@ -5,7 +5,7 @@
  */
 package service;
 
-import DATA_connect.Laczenie_z_baza;
+import DATAconnect.DAO;
 import java.io.Serializable;
 
 import javax.faces.application.FacesMessage;
@@ -46,7 +46,7 @@ public class Logowanie implements Serializable {
     }
     
     public String sprawdz() {
-        Laczenie_z_baza baza = new Laczenie_z_baza();
+        DAO baza = new DAO();
         if (baza.sprawdzenieLP(nazwa, haslo)) { 
             HttpSession session = SessionUtils.getSession();
             session.setAttribute("username", nazwa);

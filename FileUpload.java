@@ -5,6 +5,8 @@
  */
 package service;
 
+import DATAconnect.FileUploadDAO;
+
 import java.io.IOException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -17,8 +19,8 @@ import javax.servlet.http.Part;
 
 @ManagedBean
 @SessionScoped
-public class FileUpload {
-    private Part file1;
+public class FileUpload extends GalleryData{
+    private Part file1;   
 
     public Part getFile1() {
         return file1;
@@ -30,7 +32,13 @@ public class FileUpload {
 
     
     public String upload(String nazwa) throws IOException{
-        file1.write("C:\\Users\\Dominik\\Desktop\\Server\\Tomcat\\webapps\\Baza\\" + nazwa + "\\" + getFilename(file1));
+
+        String filename=getFilename(file1);
+        
+        file1.write("C:\\Users\\Dominik\\Desktop\\Server\\Tomcat\\webapps\\Baza\\" + nazwa + "\\" + getNazwaGalerii() + "\\" + filename);
+        
+        FileUploadDAO data = new FileUploadDAO();
+        data.wpisywanie(nazwa, getNazwaGalerii(), filename);
         
         return "success";
     }

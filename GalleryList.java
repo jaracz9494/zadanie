@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package DATA_connect;
+package DATAconnect;
+
+// PROJEKT PORZUCONY ZE WZGLĘDU NA: <ui:repeat> i jego błędne interpretacje (wiecej informacji w wymagania.txt)
 
 import java.sql.ResultSetMetaData;
 import java.util.ArrayList;
@@ -18,7 +20,7 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean
 @SessionScoped
-public class GalleryList extends Laczenie_z_baza {
+public class GalleryList extends DAO {
     
     private List<String> ArrayList = new ArrayList<String>();
 
@@ -39,7 +41,7 @@ public class GalleryList extends Laczenie_z_baza {
             String adres;
             pobieranie_sterownikow();
             
-            result=statement.executeQuery("select FOLDER from pictures WHERE ID like '" + nazwa +"'");
+            result=statement.executeQuery("select DISTINCT FOLDER from pictures WHERE ID like '" + nazwa +"'");
             
             while(result.next()) {
                 adres = result.getString(1);

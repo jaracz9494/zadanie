@@ -8,6 +8,8 @@
         <param-value>Development</param-value>
     </context-param>
     
+    
+    <!-- filter nieautoryzowanego wejscia na podstrony -->
     <filter>
         <filter-name>AuthorizationFilter</filter-name>          
         <filter-class>filter.AuthorizationFilter</filter-class>       
@@ -26,6 +28,9 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
+    
+    
+    <!-- https -->
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>AW_v2</web-resource-name>

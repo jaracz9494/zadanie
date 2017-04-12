@@ -12,23 +12,63 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>#{logowanie.nazwa}</title>
         
-        <script type = "text/javascript">
-            
-        
-        
-
-        </script>
+        <h:outputStylesheet library="css" name="styles.css" />
         
     </h:head>
     <h:body>
-    #{Pobieranie_obrazow.clearArrayList()}
-    #{Pobieranie_obrazow.wyswietlanie_sciezek(logowanie.nazwa)}
-       
-        <h:form>
-            <ui:repeat var="item" value="#{pobieranie_obrazow.arrayList}" >
-                <img src="#{item}" alt="#{item}"/>
-            </ui:repeat>   
-            #{Pobieranie_obrazow.clearArrayList()}
+                
+        Powrót
+         <h:form>
+            <h:commandButton value="wróć" action="/views/mainView?faces-redirect=true" />
         </h:form>
-    </body>
+        <br />
+        
+        <p3>Wybierz pliki</p3>
+        
+        <h:form enctype="multipart/form-data">
+            <h:inputFile value="#{fileUpload.file1}" /><br />
+            <h:commandButton value="upload" action="#{fileUpload.upload(logowanie.nazwa)}" />
+        </h:form>        
+        <br />
+        
+        GALERIA
+          
+        <h:form>
+            
+            <ui:repeat var="item" value="#{imagesList.arrayList}" >
+                <img src="#{item}" alt="#{item}" />
+            </ui:repeat>   
+           
+        </h:form>
+        
+        testy
+        
+         <div class="dropdown">
+<button id="myBtn" class="dropbtn">Dropdown</button>
+  <div id="myDropdown" class="dropdown-content">
+      
+      <h:form>
+            
+            <ui:repeat var="item" value="#{imagesList.nazwyobrazow}" >
+                <h:commandButton value="#{item}" action="#{fileDelete.delete(logowanie.nazwa, item)}" />
+            </ui:repeat>   
+           
+        </h:form>
+     
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+</div>
+
+<script>
+    
+document.getElementById("myBtn").onclick = function() {myFunction()};
+
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+</script>
+    </h:body>
 </html>

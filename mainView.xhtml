@@ -9,20 +9,19 @@ and open the template in the editor.
 xmlns:f="http://java.sun.com/jsf/core"
 xmlns:h="http://java.sun.com/jsf/html"
 xmlns:ui="http://java.sun.com/jsf/facelets">
+
+    
     <h:head>
         <title>#{logowanie.nazwa}</title>
         
         <script type = "text/javascript">
-            
-        
         
 
         </script>
         
     </h:head>
     <h:body>
-    #{galleryList.clearArrayList()}
-    #{galleryList.wyswietlanie_sciezek(logowanie.nazwa)}
+    
         <h:outputText value="Witaj" style="color: red; size: 25px;" />
         <br />
         <h:outputText value="#{logowanie.nazwa}"></h:outputText>
@@ -32,25 +31,30 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
             <br />
             <h:commandButton value="Powrót na stronę 1" action="/index?faces-redirect=true"></h:commandButton>
         </h:form>
-        <br />
-        
-        <p3>Wybierz pliki</p3>
-        
-        <h:form enctype="multipart/form-data">
-            <h:inputFile value="#{fileUpload.file1}" /><br />
-            <h:commandButton value="upload" action="#{fileUpload.upload(logowanie.nazwa)}" />
-        </h:form>
-        
-        <br />
-        
+        <br />      
         
         
         Przejdz do galerii
+        
         <h:form>
-            <ui:repeat var="item" value="#{galleryList.arrayList}" >
-                <h:commandButton value="#{item}" action="/vews/gallery?faces-redirect=true" />
-            </ui:repeat>   
-            #{galleryList.clearArrayList()}
+            <h:commandButton value="galeria1" action="#{imagesList.wyswietlanie_sciezek(logowanie.nazwa, 'galeria1')}" >
+                <f:actionListener binding="#{galleryData.setNazwaGalerii('galeria1')}" />
+            </h:commandButton>
+            
+            <h:commandButton value="galeria2" action="#{imagesList.wyswietlanie_sciezek(logowanie.nazwa, 'galeria2')}" >
+                <f:actionListener binding="#{galleryData.setNazwaGalerii('galeria2')}" />
+            </h:commandButton>
+            
+            <h:commandButton value="galeria3" action="#{imagesList.wyswietlanie_sciezek(logowanie.nazwa, 'galeria3')}" >
+                <f:actionListener binding="#{galleryData.setNazwaGalerii('galeria3')}" />
+            </h:commandButton>
+        </h:form>
+        
+            
+            
+        testy
+        <h:form>
+            <h:commandButton value="sprawdzenie przejscia" action="/views/gallery?faces-redirect=true" />
         </h:form>
         <br />
     
