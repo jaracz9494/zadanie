@@ -21,7 +21,7 @@ import javax.faces.bean.SessionScoped;
 public class FileDelete extends GalleryData{
     
     public String delete(String nazwa, String filename) throws IOException {
-        
+        System.out.println(filename);
         File file = new File("C:\\Users\\Dominik\\Desktop\\Server\\Tomcat\\webapps\\Baza\\" + nazwa + "\\" + getNazwaGalerii() + "\\" + filename);
         
         if(file.delete()){

@@ -19,8 +19,9 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class ImagesList extends DAO {
-    private List<String> ArrayList = new ArrayList<String>();
+    private List<String> sciezkiobrazow = new ArrayList<String>();
     private List<String> nazwyobrazow = new ArrayList<String>();
+    private static int count=-1;
 
     public List<String> getNazwyobrazow() {
         return nazwyobrazow;
@@ -30,17 +31,18 @@ public class ImagesList extends DAO {
         this.nazwyobrazow = nazwyobrazow;
     }
 
-    public List<String> getArrayList() {
-        return ArrayList;
+    public List<String> getSciezkiobrazow() {
+        return sciezkiobrazow;
     }
 
-    public void setArrayList(List<String> ArrayList) {
-        this.ArrayList = ArrayList;
+    public void setSciezkiobrazow(List<String> sciezkiobrazow) {
+        this.sciezkiobrazow = sciezkiobrazow;
     }
     
     public void clearLists() {
-        ArrayList.clear();
+        sciezkiobrazow.clear();
         nazwyobrazow.clear();
+        count=-1;
     }
     
     public String wyswietlanie_sciezek(String nazwa, String galeria){
@@ -63,7 +65,7 @@ public class ImagesList extends DAO {
                     adres += "/"+result.getString(i);                    
                 }
                 
-                ArrayList.add(adres);
+                sciezkiobrazow.add(adres);
                 System.out.println(adres);                 
             }           
             
@@ -78,11 +80,31 @@ public class ImagesList extends DAO {
         }
     }
     
+    public void ustaw() {
+        count = count + 1; 
+        System.out.println(count);
+    }
+    
+    public int numer() {
+        return count; 
+    }
+    
+    public void zeruj() {
+        count = -1;
+    }
+    
+    public String nazwaobrazu() {
+        
+        System.out.println("wtf: " + count);
+        return sciezkiobrazow.get(count);
+    } 
+    
+    /*
     public static int liczba=0;
     public void test(String nazwa) {
         System.out.println("dziala test: " + nazwa + " " + liczba);
         liczba++;
         //return "gallery.xhtml?faces-redirect=true";
     }
-    
+    */
 }
