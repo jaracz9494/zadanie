@@ -14,10 +14,7 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
         <title>#{logowanie.nazwa}</title>
         
-        <script type = "text/javascript">
-        
-
-        </script>
+        <h:outputStylesheet library="css" name="styles.css" />
         
     </h:head>
     <h:body>
@@ -26,17 +23,25 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
         <br />
         <h:outputText value="#{logowanie.nazwa}"></h:outputText>
         <br />
-        <h:form>
+        <h:form class="withoutform">
             <h:commandButton action="#{logowanie.logout}" value="Logout"></h:commandButton>
             <br />
-            <h:commandButton value="Powrót na stronę 1" action="/index?faces-redirect=true"></h:commandButton>
+            <h:commandButton value="Powrót na stronę logowania" action="/index?faces-redirect=true"></h:commandButton>
         </h:form>
         <br />      
+        
+        <h:form id="logi" class="dropdown-content-hide">
+            Funkcje admina:
+            <h:commandButton value="utworz logi" action="#{logFile.CreateLogFile()}" />
+            <br />
+            <br />
+            
+        </h:form>
         
         
         Przejdz do galerii
         
-        <h:form>
+        <h:form class="withoutform">
             <h:commandButton value="galeria1" action="#{imagesList.wyswietlanie_sciezek(logowanie.nazwa, 'galeria1')}" >
                 <f:actionListener binding="#{galleryData.setNazwaGalerii('galeria1')}" />
             </h:commandButton>
@@ -54,17 +59,19 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
             
         </h:form>
         <br />
-            
-            
-        testy
-        <h:form>
-            <h:commandButton value="sprawdzenie przejscia" action="/views/gallery?faces-redirect=true" />
-        </h:form>
-        <br />
+                        
     
         
         <h:graphicImage value="../../../Baza/PL.jpg" />
 
+        
+        <script type = "text/javascript">
+        
+        if (document.title == "admin") {
+            document.getElementById('logi').className = "show";
+        }
+        
+        </script>
         
     </h:body>
 </html>

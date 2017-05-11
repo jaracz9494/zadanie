@@ -30,4 +30,27 @@ public class FileUploadDAO extends DAO {
             System.out.println("blad " + ex.getMessage());
         }
     }
+    
+    public boolean sprIstnienia (String id, String folder, String name) {
+        try{
+            pobieranie_sterownikow();
+            
+            result=statement.executeQuery("select ID, FOLDER, NAME from pictures WHERE ID like '" + id +"' and FOLDER like '" + folder +"' and NAME like '" + name +"'");
+            
+            if (result.next()) {
+                System.out.println("nazwa: " + result.getString(3) + " jest juz w folderze " + result.getString(2));
+                connection.close();
+                return true;
+            } else {
+          
+                connection.close();
+                return false;
+            
+            }
+            
+        } catch(Exception ex){
+            System.out.println("blad " + ex.getMessage());
+            return true;
+        }
+    }
 }

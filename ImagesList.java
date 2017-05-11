@@ -65,8 +65,7 @@ public class ImagesList extends DAO {
                     adres += "/"+result.getString(i);                    
                 }
                 
-                sciezkiobrazow.add(adres);
-                System.out.println(adres);                 
+                sciezkiobrazow.add(adres);                 
             }           
             
             connection.close();
@@ -82,7 +81,6 @@ public class ImagesList extends DAO {
     
     public void ustaw() {
         count = count + 1; 
-        System.out.println(count);
     }
     
     public int numer() {
@@ -95,7 +93,6 @@ public class ImagesList extends DAO {
     
     public String nazwaobrazu() {
         
-        System.out.println("wtf: " + count);
         return sciezkiobrazow.get(count);
     } 
     

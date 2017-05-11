@@ -29,7 +29,7 @@ xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
         
         <h:form enctype="multipart/form-data">
             <h:inputFile value="#{fileUpload.file1}" /><br />
-            <h:commandButton value="upload" action="#{fileUpload.upload(logowanie.nazwa)}" />
+            <h:commandButton value="prześlij" action="#{fileUpload.upload(logowanie.nazwa)}" />
         </h:form>        
         <br />
         <p id="testy"></p>
@@ -41,27 +41,44 @@ xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
                     #{imagesList.ustaw()}
                     <c:set var="item" value="#{imagesList.nazwaobrazu()}" />
                     <div class="dropdown">
-                    <img src="#{item}" alt="#{item}" onclick="myFunction(#{imagesList.numer()})" />
-                    <div id="#{imagesList.numer()}" class="dropdown-content">                        
+                    <img id="idimagedropdowncontext" src="#{item}" alt="#{item}" onclick="myFunction(#{imagesList.numer()})" />
+                    <div id="#{imagesList.numer()}" class="dropdown-content-hide">                        
                         <h:commandLink value="Usun" action="#{fileDelete.delete(logowanie.nazwa, item2)}" class="delpic" />                        
-                        <a href="#{item}" class="delpic">#{item2}</a>
+                        <a href="#{item}" class="showpic">#{item2}</a>
                     </div>    
                     </div>
                         
                 </ui:repeat>   
                 #{imagesList.zeruj()}
             </section>
-        </h:form>        
+        </h:form>    
+        
         
 
 <script>
-    
-//document.getElementById("myBtn").onclick = function() {myFunction()};
+
+var idimage;
 
 function myFunction(zmienna) {
-    document.getElementById(zmienna).classList.toggle("show");
+    if (idimage != null) {
+        document.getElementById(idimage).className = "dropdown-content-hide";
+    }
+    
+    document.getElementById(zmienna).className = "dropdown-content";
+    idimage = zmienna;
 }
 
+
+window.onclick = function(event) {
+  if (!event.target.matches('#idimagedropdowncontext')) {
+
+    if (idimage != null) {
+        document.getElementById(idimage).className = "dropdown-content-hide";
+    }
+  }
+};
+
 </script>
+    
     </h:body>
 </html>

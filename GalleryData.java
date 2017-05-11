@@ -19,11 +19,12 @@ public class GalleryData {
     
     private static String NazwaGalerii;
 
-    public static String getNazwaGalerii() {
+    public String getNazwaGalerii() {
         return NazwaGalerii;
     }
 
     public void setNazwaGalerii(String NazwaGalerii) {
         this.NazwaGalerii = NazwaGalerii;
     }
+    
 }

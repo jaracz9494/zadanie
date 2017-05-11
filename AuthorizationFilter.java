@@ -32,6 +32,7 @@ public class AuthorizationFilter implements Filter {
 
 	}
 
+        // doFilter jest wykonywany kiedy przechodzi przez niego żądanie
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {

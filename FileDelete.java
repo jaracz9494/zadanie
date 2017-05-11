@@ -33,6 +33,6 @@ public class FileDelete extends GalleryData{
         FileDeleteDAO del = new FileDeleteDAO();
         del.usuwanie(nazwa, getNazwaGalerii(), filename);
         
-        return "success";
+        return "successdelete";
     }
 }

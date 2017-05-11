@@ -22,6 +22,9 @@ import javax.servlet.http.Part;
 @ManagedBean
 @SessionScoped
 public class FileUpload extends GalleryData{
+    
+    private final String sciezka = "C:\\Users\\Dominik\\Desktop\\Server\\Tomcat\\webapps\\Baza\\";
+    
     private Part file1;
 
 
@@ -39,15 +42,31 @@ public class FileUpload extends GalleryData{
             FacesContext facesContext = FacesContext.getCurrentInstance();
             facesContext.addMessage("Blad", new FacesMessage("Nie wybrano obrazka"));
             return null;
-        } else {
+        } 
+            
         String filename=getFilename(file1);
         
-        file1.write("C:\\Users\\Dominik\\Desktop\\Server\\Tomcat\\webapps\\Baza\\" + nazwa + "\\" + getNazwaGalerii() + "\\" + filename);
-        
+        if (!checkpicture(filename)) {
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage("Blad", new FacesMessage("Obsługiwane rozszerzenia: JPG, JPEG, PNG, GIF"));
+            return null;
+        } 
+            
         FileUploadDAO data = new FileUploadDAO();
+        
+        if (data.sprIstnienia(nazwa, getNazwaGalerii(), filename)) {
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            facesContext.addMessage("Blad", new FacesMessage("Obrazek o tej nazwie juz istnieje!"));
+            return null;
+        } else {
+        
         data.wpisywanie(nazwa, getNazwaGalerii(), filename);
         
+        file1.write(sciezka + nazwa + "\\" + getNazwaGalerii() + "\\" + filename);
+        
+        
         return "success";
+        
         }
     }
     
@@ -59,5 +78,21 @@ public class FileUpload extends GalleryData{
             }
         }
         return null;
+    }
+    
+    private boolean checkpicture(String nazwa){
+        if (nazwa.endsWith(".jpg")) {
+            return true;
+        }
+        if (nazwa.endsWith(".jpeg")) {
+            return true;
+        }
+        if (nazwa.endsWith(".png")) {
+            return true;
+        }
+        if (nazwa.endsWith(".gif")) {
+            return true;
+        }
+        return false;
     }
 }

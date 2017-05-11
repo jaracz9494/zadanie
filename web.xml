@@ -14,7 +14,7 @@
         <filter-name>AuthorizationFilter</filter-name>          
         <filter-class>filter.AuthorizationFilter</filter-class>       
         <init-param>
-            <param-name>error_page</param-name>
+            <param-name>strona</param-name>
             <param-value>index.xhtml</param-value>
         </init-param>
     </filter>

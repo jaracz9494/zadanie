@@ -7,6 +7,7 @@ package service;
 
 import DATAconnect.DAO;
 import java.io.Serializable;
+import adminsservice.LogFile;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -27,7 +28,7 @@ import javax.servlet.http.HttpServletRequest;
 @ManagedBean
 @SessionScoped
 //WAZNE! w index.xhtml musisz wpisywac Logowanie z pierwszej litery jako małej! (czyli Logowanie = logowanie)
-public class Logowanie implements Serializable {
+public class Logowanie extends LogFile implements Serializable {
     
     private String nazwa="Stud";
     private String haslo="";
@@ -49,31 +50,15 @@ public class Logowanie implements Serializable {
         this.nazwa = nazwa;
     }
     
-    public String sprawdz() {
-        
-        /*
-        FacesContext context = FacesContext.getCurrentInstance();
-        ExternalContext externalContext = context.getExternalContext();
-        HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
-        */
+    public String sprawdz() {         
         
         DAO baza = new DAO();
-        if (baza.sprawdzenieLP(nazwa, haslo)) {
-            /*
-            try {
-            System.out.println(nazwa + " " + haslo);
-            request.login(nazwa, haslo);
-            */
+        if (baza.sprawdzenieLP(nazwa, haslo)) {            
             
+            incIloscwejsc();
             HttpSession session = SessionUtils.getSession();
             session.setAttribute("username", nazwa);
-            return "views/mainView?faces-redirect=true";
-            
-            /*
-            } catch (ServletException e) {
-              System.out.println("Blad servleta: " + e);
-              return null;
-            }*/
+            return "views/mainView?faces-redirect=true";            
             
         } else {
             FacesContext facesContext = FacesContext.getCurrentInstance();
