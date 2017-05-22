@@ -1,12 +1,96 @@
 
-
+/*
 form {
     background-color: #009900;
 }
+*/
+
+.page {
+    text-align: -webkit-center;
+    background-color: #364a36;
+    color: #fff;
+}
+
+.panel {   
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+    background-repeat: repeat-x;
+    font-weight: 400;
+    text-align: -webkit-center;
+    white-space: nowrap;
+    vertical-align: middle;
+    max-width: 310px;
+}
+
+.witaj {
+    background-image: linear-gradient(to bottom,#5cb85c 0,#419641 100%);
+    border-color: #3e8f3e;
+    background-color: #5cb85c;   
+    width: 100%;
+}
+
+
+.powrot {
+    background-image: linear-gradient(to bottom,#f0ad4e 0,#eb9316 100%);   
+    border-color: #e38d13;
+    background-color: #f0ad4e;
+    width: 50%;
+    font-size: 18px;
+    line-height: 1.3333333;
+    color: #fff;   
+    cursor: pointer;
+}
+
+.logout {
+    background-image: linear-gradient(to bottom,#d9534f 0,#c12e2a 100%);
+    border-color: #b92c28;
+    background-color: #d9534f;
+    width: 50%;
+    font-size: 18px;
+    line-height: 1.3333333;
+    color: #fff;   
+    cursor: pointer;
+}
+
+
+.funct-admina {
+    background-image: linear-gradient(to bottom,#8626b5 0,#cc02ef 100%);
+    border-color: #8700af;
+    background-color: #ca00aa;
+    width: 100%;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+    color: #fff;   
+    cursor: pointer;  
+}
+
+
+.gallery {
+    background-image: linear-gradient(to bottom,#5bc0de 0,#2aabd2 100%);
+    border-color: #1b6d85;
+    background-color: #269abc;
+    width: 100%;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+    color: #fff;   
+    cursor: pointer;   
+}
+
+
+
 
 .withoutform {
     background-color: white;
 }
+
+.tekststrony {
+    font-family: Times New Roman, serif;
+    margin: 10px 0 0 0;
+}
+
 
 
 .primary {
@@ -17,7 +101,8 @@ form {
 .primary .dropdown img {
     position: relative;
     max-width: 200px;
-    margin: 0 20px 20px 0;
+    max-height: 200px;
+    margin: 20px 20px 0 0;
 }
 
 
@@ -72,7 +157,56 @@ form {
 }
 
 
-.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdown-content a:hover {background-color: #DFDFDF}
 
 .show {display:block;}
+
+.loguj {
+    background-image: linear-gradient(to bottom,#5cb85c 0,#419641 100%);   
+    border-color: #3e8f3e;
+    background-color: #5cb85c;
+    background-repeat: repeat-x;
+    font-size: 18px;
+    line-height: 1.3333333;
+    border-radius: 6px;
+    color: #fff;   
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    padding: 5px 15px;
+    margin-top: 5px;
+}
+
+.pola-logowania {
+    background-image: linear-gradient(to bottom,#407740 0,#00AA00 100%);
+    color: #FFF;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    font-family: sans-serif;
+    max-width: 310px;
+    //text-align: left;
+}
+
+.pole-zdjec {
+    background-image: linear-gradient(to bottom,#407740 0,#00AA00 100%);
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    padding: 10px 15px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+#formdiv {
+    margin: 0 auto;
+}
+
+
 

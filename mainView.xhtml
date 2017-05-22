@@ -17,52 +17,66 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
         <h:outputStylesheet library="css" name="styles.css" />
         
     </h:head>
-    <h:body>
-    
-        <h:outputText value="Witaj" style="color: red; size: 25px;" />
-        <br />
-        <h:outputText value="#{logowanie.nazwa}"></h:outputText>
-        <br />
-        <h:form class="withoutform">
-            <h:commandButton action="#{logowanie.logout}" value="Logout"></h:commandButton>
-            <br />
-            <h:commandButton value="Powrót na stronę logowania" action="/index?faces-redirect=true"></h:commandButton>
-        </h:form>
-        <br />      
-        
-        <h:form id="logi" class="dropdown-content-hide">
-            Funkcje admina:
-            <h:commandButton value="utworz logi" action="#{logFile.CreateLogFile()}" />
-            <br />
-            <br />
+    <h:body class="page">
+        <section class="panel">
             
-        </h:form>
+            
+            <section class="witaj">
+            <h:outputText value="Witaj" style="color: #124e12; size: 25px;" />
+            <br />
+            <h:outputText value="#{logowanie.nazwa}"></h:outputText>
+            <br />
+            </section>
+
+
+            <h:form>
+                
+                    <h:commandButton class="powrot" value="Przeloguj" action="/index?faces-redirect=true"></h:commandButton>            
+                    <h:commandButton class="logout" value="Wyloguj" action="#{logowanie.logout}"></h:commandButton>
+
+            </h:form>      
+
+            <section id="logi" class="dropdown-content-hide">   
+                <div style="margin-top: 10px">
+                    Funkcje admina:
+                </div>
+                
+                <h:form>           
+                    <h:commandButton class="funct-admina" value="przejdz do funkji administracyjnych" action="#{logowanie.sprawdzUprawnienia()}" ></h:commandButton>         
+                </h:form>
+            </section>
+            
+            <div style="margin-top: 10px">
+                Przejdz do galerii
+            </div>
+            
+            <h:form>
+                <h:commandButton class="gallery" value="galeria1" action="#{imagesList.wyswietlanie_sciezek(logowanie.nazwa, 'galeria1')}" >
+                    <f:actionListener binding="#{galleryData.setNazwaGalerii('galeria1')}" />
+                </h:commandButton>
+                <br />
+
+                <h:commandButton class="gallery" value="galeria2" action="#{imagesList.wyswietlanie_sciezek(logowanie.nazwa, 'galeria2')}" >
+                    <f:actionListener binding="#{galleryData.setNazwaGalerii('galeria2')}" />
+                </h:commandButton>
+                <br />
+
+                <h:commandButton class="gallery" value="galeria3" action="#{imagesList.wyswietlanie_sciezek(logowanie.nazwa, 'galeria3')}" >
+                    <f:actionListener binding="#{galleryData.setNazwaGalerii('galeria3')}" />
+                </h:commandButton>
+                <br />
+
+            </h:form>
         
         
-        Przejdz do galerii
         
-        <h:form class="withoutform">
-            <h:commandButton value="galeria1" action="#{imagesList.wyswietlanie_sciezek(logowanie.nazwa, 'galeria1')}" >
-                <f:actionListener binding="#{galleryData.setNazwaGalerii('galeria1')}" />
-            </h:commandButton>
-            <br />
-            
-            <h:commandButton value="galeria2" action="#{imagesList.wyswietlanie_sciezek(logowanie.nazwa, 'galeria2')}" >
-                <f:actionListener binding="#{galleryData.setNazwaGalerii('galeria2')}" />
-            </h:commandButton>
-            <br />
-            
-            <h:commandButton value="galeria3" action="#{imagesList.wyswietlanie_sciezek(logowanie.nazwa, 'galeria3')}" >
-                <f:actionListener binding="#{galleryData.setNazwaGalerii('galeria3')}" />
-            </h:commandButton>
-            <br />
-            
-        </h:form>
+        
+        </section>
         <br />
                         
     
         
-        <h:graphicImage value="../../../Baza/PL.jpg" />
+        <img src="/Baza/PL.jpg" />
 
         
         <script type = "text/javascript">
@@ -72,6 +86,7 @@ xmlns:ui="http://java.sun.com/jsf/facelets">
         }
         
         </script>
+        
         
     </h:body>
 </html>

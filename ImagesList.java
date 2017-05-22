@@ -21,7 +21,16 @@ import javax.faces.bean.SessionScoped;
 public class ImagesList extends DAO {
     private List<String> sciezkiobrazow = new ArrayList<String>();
     private List<String> nazwyobrazow = new ArrayList<String>();
+    private String puste; 
     private static int count=-1;
+    
+    public String getPuste() {
+        return puste;
+    }
+
+    public void setPuste(String puste) {
+        this.puste = puste;
+    }
 
     public List<String> getNazwyobrazow() {
         return nazwyobrazow;
@@ -49,6 +58,7 @@ public class ImagesList extends DAO {
         try{         
 
             clearLists();
+            puste=null;
             String adres="../../../Baza/";
             pobieranie_sterownikow();
             
@@ -57,7 +67,13 @@ public class ImagesList extends DAO {
             
             int ilosckolumn = metadata.getColumnCount();
             
-            while(result.next()) {
+            
+            if (!result.next()) {
+                puste = "brak obrazków";
+            } else {
+            
+            do {
+                
                 adres = "../../../Baza/"+nazwa;
                 nazwyobrazow.add(result.getString(2));
                 
@@ -66,11 +82,10 @@ public class ImagesList extends DAO {
                 }
                 
                 sciezkiobrazow.add(adres);                 
-            }           
+            } while(result.next());         
+            }
             
             connection.close();
-            //System.out.println(galeria);
-            //System.out.println("dziala glowne zadanie");
             return "gallery.xhtml?faces-redirect=true";
             
         } catch(Exception ex){
@@ -96,12 +111,4 @@ public class ImagesList extends DAO {
         return sciezkiobrazow.get(count);
     } 
     
-    /*
-    public static int liczba=0;
-    public void test(String nazwa) {
-        System.out.println("dziala test: " + nazwa + " " + liczba);
-        liczba++;
-        //return "gallery.xhtml?faces-redirect=true";
-    }
-    */
 }

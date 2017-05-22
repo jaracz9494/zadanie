@@ -6,19 +6,30 @@ and open the template in the editor.
 -->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:f="http://java.sun.com/jsf/core"
-xmlns:h="http://java.sun.com/jsf/html"
-xmlns:ui="http://java.sun.com/jsf/facelets">
-    <head>
+xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
         <title>SUCCESS</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <h:body>
-        <div>PLIK WSTAWIONO</div>
+        <h:outputStylesheet library="css" name="styles.css" />
+
+    </h:head>
+    <h:body class="page">
+        <section class="panel">
+            
+            
+        <div style="margin: 20px 0 10px 0;">PLIK WSTAWIONO</div>
         
         
          <h:form>
-             <h:commandButton value="Powrót" action="#{imagesList.wyswietlanie_sciezek(logowanie.nazwa, galleryData.nazwaGalerii)}" />
+             <h:commandButton class="powrot" id="button" value="Powrót" action="#{imagesList.wyswietlanie_sciezek(logowanie.nazwa, galleryData.nazwaGalerii)}" />
         </h:form>
-    </h:body>
+        
+        
+        </section>
+        <script>
+        //window.onclick = function() {  
+        //    document.getElementById('button').click();
+        //};
+        </script>
+    
+    </h:body>   
 </html>

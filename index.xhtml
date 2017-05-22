@@ -13,28 +13,35 @@
         
         
     </h:head>
-    <h:body>
+    <h:body class="page">
+        
         
         <img id="baner" src="../Baza/baner.jpg" ></img>
         
         <br />
-        LOGOWANIE
-        <br />
-        <h:outputText value="#{logowanie.nazwa}"></h:outputText>    
-        <br />
+        <section class="tekststrony">
+            LOGOWANIE
+        </section>
+
         
         <h:messages layout="table" style="color: red" />
         
-        <h:form>           
-            <h:inputText id="nazwa" value="#{logowanie.nazwa}" />
+        <h:form>  
+            <section class="pola-logowania">
+                Login:
+                <br />
+                <h:inputText id="nazwa" value="#{logowanie.nazwa}" />
+            <br />    
             <br />
-            <h:inputSecret id="haslo" value="#{logowanie.haslo}" />
-            <br />            
-            <h:commandButton value="Sprawdz" action="#{logowanie.sprawdz()}">
-            </h:commandButton>
+                Hasło:
+                <br />
+                <h:inputSecret id="haslo" value="#{logowanie.haslo}" />
+            </section>
+            
+            <h:commandButton class="loguj" value="Loguj" action="#{logowanie.sprawdz()}" />
         </h:form>
         
-        
+ 
     </h:body>
 </html>
 

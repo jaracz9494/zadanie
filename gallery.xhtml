@@ -16,26 +16,30 @@ xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
         <h:outputStylesheet library="css" name="styles.css" />
         
     </h:head>
-    <h:body>
+    <h:body class="page">
+        <section class="panel">
                 
-        Powrót
          <h:form>
-            <h:commandButton value="wróć" action="/views/mainView?faces-redirect=true" />
+            <h:commandButton class="powrot" value="Powrót" action="/views/mainView?faces-redirect=true" />
         </h:form>
         <br />
       
-        <p3>Załaduj plik</p3>
+        Załaduj plik
         <h:messages layout="table" style="color: red" />
         
         <h:form enctype="multipart/form-data">
-            <h:inputFile value="#{fileUpload.file1}" /><br />
-            <h:commandButton value="prześlij" action="#{fileUpload.upload(logowanie.nazwa)}" />
+            <h:inputFile class="gallery" value="#{fileUpload.file1}" /><br />
+            <h:commandButton class="gallery" value="prześlij" action="#{fileUpload.upload(logowanie.nazwa)}" />
         </h:form>        
         <br />
-        <p id="testy"></p>
+        
+        
+        
+        </section>
+        
         GALERIA
           
-        <h:form>
+        <h:form class="pole-zdjec">
             <section class="primary">
                 <ui:repeat var="item2" value="#{imagesList.nazwyobrazow}" >
                     #{imagesList.ustaw()}
@@ -53,7 +57,7 @@ xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
             </section>
         </h:form>    
         
-        
+        #{imagesList.puste}
 
 <script>
 

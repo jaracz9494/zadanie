@@ -32,6 +32,8 @@ public class Logowanie extends LogFile implements Serializable {
     
     private String nazwa="Stud";
     private String haslo="";
+    private boolean uprzywilejowany=false;
+
 
     public String getHaslo() {
         return haslo;
@@ -50,12 +52,27 @@ public class Logowanie extends LogFile implements Serializable {
         this.nazwa = nazwa;
     }
     
+    public String sprawdzUprawnienia() {
+        if (uprzywilejowany) {
+            CreateListofFiles();
+            return "admins/adminsActions?faces-redirect=true";
+        } else {
+            System.out.println("Nieautoryzowana proba logowania na admina!!!");
+            CreateUnauthAdmin(nazwa);
+            return null;
+        }
+    }
+    
     public String sprawdz() {         
         
         DAO baza = new DAO();
         if (baza.sprawdzenieLP(nazwa, haslo)) {            
             
-            incIloscwejsc();
+            if (baza.sprawdzRoleName(nazwa)) {
+                uprzywilejowany=true;
+            }           
+            
+            zmienRejestr(nazwa);           
             HttpSession session = SessionUtils.getSession();
             session.setAttribute("username", nazwa);
             return "views/mainView?faces-redirect=true";            

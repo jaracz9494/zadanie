@@ -24,25 +24,13 @@ public class DAO {
     public java.sql.Connection connection;
     public Statement statement;
     public ResultSet result;
-    //private String adres="../../../Baza/";
+
     private static final String Sterownik = "org.apache.derby.jdbc.ClientDriver";
     private static final String URL = "jdbc:derby://localhost:1527/baza";
     private static final String BLogin = "user1";
     private static final String BPass = "zaq1";    
         
-
-    /*
-    public String getAdres() {
-        //String a=adres;
-        //adres="../../../Baza/";
-        System.out.println(adres);                 
-        return adres;
-    }
-
-    public void setAdres(String adres) {
-        this.adres = adres;
-    }
-    */
+   
     
     public void pobieranie_sterownikow() {
         try {
@@ -68,7 +56,6 @@ public class DAO {
             while(result.next()) {
                     l=result.getString(1);
                     p=result.getString(2);
-                    //System.out.print(l+" "+p);
                     
                     if (l.equals(login) && p.equals(haslo)) {
                         connection.close();
@@ -81,35 +68,31 @@ public class DAO {
             return false;
             
         } catch(Exception ex){
-            System.out.println("blad " + ex.getMessage());
+            System.out.println("blad sprawdzaniaLP " + ex.getMessage());
+            return false;
+        }
+    }   
+    
+    
+    public boolean sprawdzRoleName(String login) {
+        
+        try {
+            pobieranie_sterownikow(); 
+            
+            result=statement.executeQuery("select LOGIN, ROLE_NAME from ROLES where LOGIN like '" + login +"' and ROLE_NAME like 'admins'");
+            
+            while(result.next()) {               
+                connection.close();
+                return true;
+            }
+            
+            connection.close();
+            return false;
+            
+        } catch(Exception ex){
+            System.out.println("blad pobierania roli " + ex.getMessage());
             return false;
         }
     }
     
-    /*
-    public String wywolanie_bazy(String nazwa){
-        try {
-            adres="../../../Baza/";
-            pobieranie_sterownikow();
-            
-            result=statement.executeQuery("select NAME from pictures WHERE ID like '" + nazwa +"'");
-            ResultSetMetaData metadata = result.getMetaData();
-            
-            System.out.println(metadata.getColumnCount());
-            int ilosckolumn = metadata.getColumnCount();
-            
-            while(result.next()) {                
-                adres = adres+nazwa+result.getString(1);
-                System.out.println(adres);                 
-            }
-            
-            
-            connection.close();
-            return adres;
-        } catch(Exception ex){
-            System.out.println("blad " + ex.getMessage());
-            return null;
-        }
-    }
-    */
 }
